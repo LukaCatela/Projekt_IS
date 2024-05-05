@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <h1 class="naslov">Prijava termina konzultacija</h1>
+        <div class="forma-container">
+            <form action="prijava.html" method="POST" class="forma">
+                <input type="text" name="JMBG" placeholder="JMBG studenta">
+                <br>
+                <label for="predmeti_id">Izaberi kolegij:</label>
+                <select id="predmeti_id" name="predmeti">
+                    <option value="Prog">Programiranje</option>
+                    <option value="Mat">Matematika</option>
+                    <option value="IS">Informacijski sustavi</option>
+                </select>
+                <br>
+                <input type="text" name="mjesto" placeholder="Mjesto održavanja">
+                <br>
+                <input type="date" name="datum" placeholder="Željeni datum">
+                <br>
+                <input type="time" name="vrijeme" placeholder="Vrijeme održavanja">
+                <br> 
+                <label for="profesori">Izaberi kod kojeg profesora:</label>
+                <select id="profesori" name="profesori">
+                    <option value="P1">Profesor 1</option>
+                    <option value="P2">Profesor 2</option>
+                    <option value="P3">Profesor 3</option>
+
+                </select>
+                <button type="submit" onclick="alert('Poslano je!')">Pošalji</button>
+            </form>
+        </div>
+        <br>
+        <button class="homepage_button" class="forma-container" type="button" onclick="window.location.href = 'index.html';">Vrati se na Homepage</button>
+    </body>
+</html>

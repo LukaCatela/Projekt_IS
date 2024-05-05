@@ -1,0 +1,96 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #9cd3d3;
+}
+img{
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.naslov{
+    text-align: center ;
+}
+.menu{
+    display: flex;
+    justify-content: center;
+    background-color: #2b4353;
+}
+.menu a{
+    float:none;
+    color: #e8630a;
+    text-align: center;
+    padding: 14px 16px;
+    margin:auto;
+    text-decoration: none;
+    font-size: 17px;
+}
+.menu a:hover{
+    background-color: #b6e1e0;
+    color: #2b4353;
+}
+
+.forma-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100 px;
+}
+.forma {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+select{
+    background-color: #f2f2f2;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;}
+
+.forma input[type="text"],
+.forma input[type="date"],
+.forma input[type="time"],
+.forma button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.forma button {
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.forma button:hover {
+    background-color: #4CAF50;
+}
+.homepage_button{
+    display: block;
+    margin: 0 auto;
+    background-color: #e8630a;
+    border: #ccc solid 1px;
+    color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+}
+.homepage_button:hover{
+    background-color: #dd7835;
+}
+
+.forma input[type="text"]:focus,
+.forma input[type="date"]:focus,
+.forma input[type="time"]:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px #4CAF50;
+}
