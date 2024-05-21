@@ -3,11 +3,11 @@ body{
     margin: 0;
     padding: 0;
     background-color: #9cd3d3;
-}
-img{
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px;
+    }
+img {
+    display: flex;
+    justify-content: center;
+
 }
 
 .naslov{
@@ -74,18 +74,7 @@ select{
 .forma button:hover {
     background-color: #4CAF50;
 }
-.homepage_button{
-    display: block;
-    margin: 0 auto;
-    background-color: #e8630a;
-    border: #ccc solid 1px;
-    color: #f2f2f2;
-    padding: 10px;
-    border-radius: 5px;
-}
-.homepage_button:hover{
-    background-color: #dd7835;
-}
+
 
 .forma input[type="text"]:focus,
 .forma input[type="date"]:focus,
