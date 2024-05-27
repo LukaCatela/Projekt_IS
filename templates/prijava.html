@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    </head>
-    <body>
+<head>
+    <title>Prijava termina konzultacija</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
         <h1 class="naslov">Prijava termina konzultacija</h1>
-        <div class="menu">
+        <nav class="menu">
             <a href="{{url_for('home')}}">Homepage</a>
             <a href="{{url_for('dodaj_konzultacije')}}">Prijava termina</a>
             <a href="{{url_for('pregled')}}">Pregled termina</a>
-        </div>
-        <br>
+        </nav>
+    </header>
+    <main>
         <div class="forma-container">
             <form action="/dodaj/konzultaciju" method="POST" class="forma">
-                <br>
                 <label for="predmeti_id">Izaberi kolegij:</label>
                 <select id="predmeti_id" name="predmeti">
                     <option value="Progamiranje">Programiranje</option>
                     <option value="Matematika">Matematika</option>
                     <option value="Informacijski_Sustavi">Informacijski sustavi</option>
                 </select>
-                <br>
-                <input type="text" name="mjesto" placeholder="Mjesto održavanja">
-                <br>
-                <input type="date" name="datum" placeholder="Željeni datum">
-                <br>
+                <label for="mjesto">Mjesto održavanja:</label>
+                <input type="text" id="mjesto" name="mjesto" placeholder="Mjesto održavanja">
+                <label for="datum">Odaberi datum:</label>
+                <input type="date" id="datum" name="datum">
                 <label for="profesor_id">Izaberi kod kojeg profesora:</label>
                 <select id="profesor_id" name="profesor">
                     <option value="P1">Profesor 1</option>
                     <option value="P2">Profesor 2</option>
                     <option value="P3">Profesor 3</option>
                 </select>
-                <button type="submit" onclick="alert('Poslano je!')">Pošalji</button>
+                <button type="submit" class="submit-button">Pošalji</button>
             </form>
         </div>
-    </body>
+    </main>
+    <footer>
+        <p>&copy; 2022 Web Stranica Luka Catela</p>
+    </footer>
+</body>
 </html>

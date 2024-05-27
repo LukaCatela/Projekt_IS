@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Online konzultacije</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-
-        
-    </head>
-    <body>
+<head>
+    <title>Online konzultacije</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
         <h1 class="naslov">Online konzultacije FIPU</h1>
-        <div class="menu">
+        <nav class="menu">
             <a href="{{url_for('home')}}">Homepage</a>
             <a href="{{url_for('dodaj_konzultacije')}}">Prijava termina</a>
             <a href="{{url_for('pregled')}}">Pregled termina</a>
-        </div>
-        <img src="/static/studentski_centar_pula.jpg" width="500" height="500">
-        <footer>
-            <p>&copy; 2022 Web Stranica Luka Catela</p>
-        </footer>
-    </body>
+        </nav>
+    </header>
+    <main>
+        <h2>Dobrodošli na stranicu za online konzultacije Fakulteta informatike u Puli</h2>
+        <img src="/static/studentski_centar_pula.jpg" alt="Studentski centar Pula" class="hero-image">
+    </main>
+    <footer>
+        <p>&copy; 2022 Web Stranica Luka Catela</p>
+    </footer>
+</body>
 </html>
