@@ -13,6 +13,7 @@
                 <a href="{{url_for('home')}}">Homepage</a>
                 <a href="{{url_for('dodaj_konzultacije')}}">Prijava termina</a>
                 <a href="{{url_for('pregled')}}">Pregled termina</a>
+                <a href="{{url_for('vizualizacija')}}">Vizualizacija termina</a>
             </nav>
     </header>
     <main>
@@ -31,7 +32,8 @@
                 </small>
               </div>
               <div>
-                <button onclick="obrisiKonzultaciju({{ termin.id }})">Obriši</button>
+                <button class="button_crveni" onclick="obrisiKonzultaciju({{ termin.id }})">Obriši</button>
+                <a href="{{url_for('uredi_konzultaciju', konzultacija_id = termin.id)}}" class="button_zeleni">Uredi</a>
               </div>
             </li>
           {% endfor %}
