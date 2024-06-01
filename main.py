@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify,make_response
 from pony import orm
 from datetime import datetime
+from itertools import groupby
+
 
 db = orm.Database()
 
@@ -60,6 +62,26 @@ def get_konzultacija():
     except Exception as e:
         return {"response": "Fail", "error": str(e)}
 
+def edit_konzultacija(konzultacija_id, json_request):
+    try:
+        with orm.db_session:
+            to_update = Konzultacije[konzultacija_id]
+            if 'naziv_profesor' in json_request:
+                to_update.naziv_profesor = json_request['naziv_profesor']
+            if 'naziv_predmet' in json_request:
+                to_update.naziv_predmet = json_request['naziv_predmet']
+            if 'datum' in json_request:
+                datum = datetime.strptime(json_request['datum'], '%d-%m-%Y')
+                to_update.datum = datum
+            if 'soba' in json_request:
+                to_update.soba = json_request['soba']
+
+            response = {"response": "Success"}
+            return response
+    except Exception as e:
+        return {"response": "Fail", "error": str(e)}
+
+
 def delete_konzultaciju(konzultacija_id):
     try:
         with orm.db_session:
@@ -68,16 +90,23 @@ def delete_konzultaciju(konzultacija_id):
             return {"response": "Success"}
     except Exception as e:
         return {"response": "Fail", "error": str(e)}
-def get_id(id_konzultacije):
+
+@orm.db_session
+def get_obaveze_subject():
     try:
-        with orm.db_session:
-            result=Konzultacije[id_konzultacije].to_dict()
-            result['datum']= format_datum(result['datum'])
-            response = {"response": "Success", "data": result}
-            return response
+        konzultacije = orm.select(k for k in Konzultacije).order_by(Konzultacije.naziv_predmet)
+        group_predmet = groupby(konzultacije, lambda k:k.naziv_predmet)
+        rezultat = [{"Predmet": naziv_predmet, "broj_konzultacija": len(list(konzultacije))} for naziv_predmet, konzultacije in group_predmet]
+
+        response = {"response": "Success", "data": {"Predmeti": rezultat}}
+
+        return response
 
     except Exception as e:
-        return {"response": "Fail", "error": str(e)}
+        error_response = {"response": "Error", "error_message": str(e)}
+        return error_response
+
+
 @app.route("/dodaj/konzultaciju", methods=["POST","GET"])
 def dodaj_konzultacije():
     if request.method == "POST":
@@ -113,6 +142,42 @@ def pregled():
     except Exception as e:
         response = {"response": "Fail", "error": str(e)}
         return make_response(jsonify(response), 400)
+
+@app.route("/vrati/obaveze/vizualizacija", methods=["GET"])
+def vizualizacija():
+    try:
+        chart_data = get_obaveze_subject()
+
+        print(chart_data)
+
+        predmeti = chart_data.get("data", {}).get("Predmeti", [])
+        x_axis = [p['Predmet'] for p in predmeti]
+        y_axis = [p['broj_konzultacija'] for p in predmeti]
+
+        response = {"response": "Success"}
+
+        if response["response"] == "Success":
+            return make_response(render_template("graf.html", y_axis=y_axis, x_axis=x_axis), 200)
+        return make_response(jsonify(response), 400)
+
+    except Exception as e:
+        error_response = {"response": "Error", "error_message": str(e)}
+        return make_response(jsonify(error_response), 500)
+
+
+@app.route("/konzultacije/<int:konzultacija_id>", methods=["PATCH"])
+def uredi_konzultaciju(konzultacija_id):
+    try:
+        json_request = request.json
+    except Exception as e:
+        response = {"response": "Invalid JSON format"}
+        return make_response(jsonify(response), 400)
+
+    response = edit_konzultacija(konzultacija_id, json_request)
+    if response["response"] == "Success":
+        return make_response(jsonify(response), 200)
+    return make_response(jsonify(response), 400)
+
 
 @app.route("/konzultacije/<int:konozultacija_id>", methods=["DELETE"])
 def obrisi_konzultaciju(konozultacija_id):
