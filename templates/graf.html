@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>Vizualizacija termina</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+            <h1 class="naslov">Online konzultacije FIPU</h1>
+            <nav class="menu">
+                <a href="{{url_for('home')}}">Homepage</a>
+                <a href="{{url_for('dodaj_konzultacije')}}">Prijava termina</a>
+                <a href="{{url_for('pregled')}}">Pregled termina</a>
+                <a href="{{url_for('vizualizacija')}}">Vizualizacija termina</a>
+            </nav>
+    </header>
+        <div class="container">
+
+            <canvas id="konzultacije_chart" width="400" height="200"></canvas>
+        </div>
+    <script>
+        var x_axis = {{ x_axis|safe }};
+        var y_axis = {{ y_axis|safe }};
+
+        var data = {
+            labels: x_axis,
+            datasets: [{
+                label: "Broj konzultacija po predmetima",
+                backgroundColor: "#082696",
+                borderColor: "#082696",
+                data: y_axis
+            }]
+        };
+
+        var config = {
+            type: "bar",
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1,
+                            precision: 0
+                        },
+                        title: {
+                            display: true,
+                            text: 'Broj obaveza'
+                        }
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += context.raw;
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        var ctx = document.getElementById("konzultacije_chart").getContext('2d');
+        var chart = new Chart(ctx, config);
+    </script>
+
+</body>
+</html>
