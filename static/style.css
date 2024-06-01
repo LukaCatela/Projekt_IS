@@ -106,8 +106,8 @@ ul li div:last-child {
     text-align: right;
 }
 
-button {
-    background-color: #ff0000;
+.button_crveni {
+    background-color: #EF0107;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -116,10 +116,22 @@ button {
     font-size: 16px;
 }
 
-button:hover {
-    background-color: #cc0000;
+.button_crveni:hover {
+    background-color:#DA291C;
+}
+.button_zeleni {
+    background-color: #00AD83;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
+.button_zeleni:hover {
+    background-color: #50C878;
+}
 
 footer {
     background-color: #4F6F52;
