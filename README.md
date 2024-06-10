@@ -26,13 +26,13 @@ Instalacija
 
 Skidanje koda s GitHub-a:
 
-cd ~/Downloads
-git clone https://github.com/LukaCatela/Projekt_IS
-cd Projekt_IS
+    cd ~/Downloads
+    git clone https://github.com/LukaCatela/Projekt_IS
+    cd Projekt_IS
 
 Docker tutorial:
 
-docker build -t Projekt_IS .
-docker ps
-docker run -p 5001:5000 Projekt_IS
+    docker build -t konzultacije .
+    docker ps
+    docker run -p 5001:5000 konzultacije
 
